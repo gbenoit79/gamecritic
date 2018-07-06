@@ -1,4 +1,2 @@
-game-critic
-===========
-
-A Symfony project created on July 6, 2018, 4:45 pm.
+# GameCritic
+Site web de critiques communautaires de jeux vidéo.
