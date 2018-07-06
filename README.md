@@ -1,2 +1,4 @@
-# gamecritic
-"Game Critic" est un site web de critique communautaires de jeux vidéo.
+game-critic
+===========
+
+A Symfony project created on July 6, 2018, 4:45 pm.
