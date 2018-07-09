@@ -1,3 +1,3 @@
 oc_game_critic_homepage:
     path:     /
-    defaults: { _controller: OCGameCriticBundle:Game:list }
+    defaults: { _controller: OCGameCriticBundle:Game:index }
