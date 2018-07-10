@@ -1,4 +1,5 @@
 services:
-#    oc_game_critic.example:
-#        class: OC\GameCriticBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+# Fixtures services
+    oc_game_critic.game_fixtures:
+        class: OC\GameCriticBundle\DataFixtures\GameFixtures
+        tags: [doctrine.fixture.orm]
