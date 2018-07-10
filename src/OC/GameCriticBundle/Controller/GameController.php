@@ -4,21 +4,17 @@ namespace OC\GameCriticBundle\Controller;
 
 use OC\GameCriticBundle\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Game controller.
  *
- * @Route("game")
  */
 class GameController extends Controller
 {
     /**
      * Lists all game entities.
      *
-     * @Route("/", name="game_index")
-     * @Method("GET")
      */
     public function indexAction()
     {
@@ -34,8 +30,6 @@ class GameController extends Controller
     /**
      * Creates a new game entity.
      *
-     * @Route("/new", name="game_new")
-     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -60,8 +54,6 @@ class GameController extends Controller
     /**
      * Finds and displays a game entity.
      *
-     * @Route("/{id}", name="game_show")
-     * @Method("GET")
      */
     public function showAction(Game $game)
     {
@@ -76,8 +68,6 @@ class GameController extends Controller
     /**
      * Displays a form to edit an existing game entity.
      *
-     * @Route("/{id}/edit", name="game_edit")
-     * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Game $game)
     {
@@ -101,8 +91,6 @@ class GameController extends Controller
     /**
      * Deletes a game entity.
      *
-     * @Route("/{id}", name="game_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Game $game)
     {

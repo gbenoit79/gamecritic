@@ -1,7 +1,3 @@
-oc_game_critic_game:
-    resource: "@OCGameCriticBundle/Controller/GameController.php"
-    type:     annotation
-
 oc_game_critic:
     resource: "@OCGameCriticBundle/Resources/config/routing.yml"
     prefix:   /
