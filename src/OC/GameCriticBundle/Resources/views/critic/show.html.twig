@@ -1,0 +1,40 @@
+{% extends '@OCGameCritic/layout.html.twig' %}
+
+{% block body %}
+    <h1>Critic</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ critic.id }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ critic.score }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ critic.content }}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{% if critic.creationDate %}{{ critic.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('critic_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('critic_edit', { 'id': critic.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

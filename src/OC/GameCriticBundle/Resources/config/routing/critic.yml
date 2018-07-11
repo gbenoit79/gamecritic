@@ -1,0 +1,24 @@
+critic_index:
+    path:     /
+    defaults: { _controller: "OCGameCriticBundle:Critic:index" }
+    methods:  GET
+
+critic_show:
+    path:     /{id}/show
+    defaults: { _controller: "OCGameCriticBundle:Critic:show" }
+    methods:  GET
+
+critic_new:
+    path:     /new
+    defaults: { _controller: "OCGameCriticBundle:Critic:new" }
+    methods:  [GET, POST]
+
+critic_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "OCGameCriticBundle:Critic:edit" }
+    methods:  [GET, POST]
+
+critic_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "OCGameCriticBundle:Critic:delete" }
+    methods:  DELETE

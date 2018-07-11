@@ -2,6 +2,10 @@ oc_game_critic_game:
     resource: "@OCGameCriticBundle/Resources/config/routing/game.yml"
     prefix:   /game
 
+oc_game_critic_critic:
+    resource: "@OCGameCriticBundle/Resources/config/routing/critic.yml"
+    prefix:   /critic
+
 oc_game_critic_homepage:
     path:     /
     defaults: { _controller: OCGameCriticBundle:Game:index }
