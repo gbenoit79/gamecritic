@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class GameFixtures extends Fixture
 {
+    const GOW_GAME_REFERENCE = 'gow-game';
+    
     public function load(ObjectManager $manager)
     {
         $gamesData = [
@@ -38,6 +40,10 @@ class GameFixtures extends Fixture
             $game->setReleaseDate($data['releaseDate']);
             $manager->persist($game);
             $manager->flush();
+
+            if ($game->getName() === 'God of War') {
+                $this->addReference(self::GOW_GAME_REFERENCE, $game);
+            }
         }
     }
 }

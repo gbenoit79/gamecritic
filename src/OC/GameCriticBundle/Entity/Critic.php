@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Critic
 {
     /**
+     * @ORM\ManyToOne(targetEntity="OC\GameCriticBundle\Entity\Game")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $game;
+    
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -31,14 +37,14 @@ class Critic
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="content", type="text")
      */
-    private $text;
+    private $content;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creationDate", type="datetime")
+     * @ORM\Column(name="creation_date", type="datetime")
      */
     private $creationDate;
 
@@ -78,27 +84,27 @@ class Critic
     }
 
     /**
-     * Set text
+     * Set content
      *
-     * @param string $text
+     * @param string $content
      *
      * @return Critic
      */
-    public function setText($text)
+    public function setContent($content)
     {
-        $this->text = $text;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get text
+     * Get content
      *
      * @return string
      */
-    public function getText()
+    public function getContent()
     {
-        return $this->text;
+        return $this->content;
     }
 
     /**
@@ -124,5 +130,28 @@ class Critic
     {
         return $this->creationDate;
     }
-}
 
+    /**
+     * Set game
+     *
+     * @param \OC\GameCriticBundle\Entity\Game $game
+     *
+     * @return Critic
+     */
+    public function setGame(\OC\GameCriticBundle\Entity\Game $game)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \OC\GameCriticBundle\Entity\Game
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+}

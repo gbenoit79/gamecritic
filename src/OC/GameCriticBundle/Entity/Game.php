@@ -45,7 +45,7 @@ class Game
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="releaseDate", type="date")
+     * @ORM\Column(name="release_date", type="date")
      */
     private $releaseDate;
 
@@ -156,4 +156,3 @@ class Game
         return $this->releaseDate;
     }
 }
-

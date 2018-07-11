@@ -3,3 +3,6 @@ services:
     oc_game_critic.game_fixtures:
         class: OC\GameCriticBundle\DataFixtures\GameFixtures
         tags: [doctrine.fixture.orm]
+    oc_game_critic.critic_fixtures:
+        class: OC\GameCriticBundle\DataFixtures\CriticFixtures
+        tags: [doctrine.fixture.orm]
