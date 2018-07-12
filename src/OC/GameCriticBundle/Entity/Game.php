@@ -49,6 +49,18 @@ class Game
      */
     private $releaseDate;
 
+     /**
+     * @ORM\OneToMany(targetEntity="OC\GameCriticBundle\Entity\Critic", mappedBy="game")
+     */
+    private $critics;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->critics = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -154,5 +166,41 @@ class Game
     public function getReleaseDate()
     {
         return $this->releaseDate;
+    }
+
+    /**
+     * Add critic
+     *
+     * @param \OC\GameCriticBundle\Entity\Critic $critic
+     *
+     * @return Game
+     */
+    public function addCritic(\OC\GameCriticBundle\Entity\Critic $critic)
+    {
+        $this->critics[] = $critic;
+
+        $critic->setAdvert($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove critic
+     *
+     * @param \OC\GameCriticBundle\Entity\Critic $critic
+     */
+    public function removeCritic(\OC\GameCriticBundle\Entity\Critic $critic)
+    {
+        $this->critics->removeElement($critic);
+    }
+
+    /**
+     * Get critics
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCritics()
+    {
+        return $this->critics;
     }
 }

@@ -13,12 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Critic
 {
     /**
-     * @ORM\ManyToOne(targetEntity="OC\GameCriticBundle\Entity\Game")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $game;
-    
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -47,6 +41,12 @@ class Critic
      * @ORM\Column(name="creation_date", type="datetime")
      */
     private $creationDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="OC\GameCriticBundle\Entity\Game", inversedBy="critics")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $game;
 
 
     /**
