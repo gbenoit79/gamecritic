@@ -2,6 +2,8 @@
 
 namespace OC\GameCriticBundle\Repository;
 
+use OC\GameCriticBundle\Entity\Game;
+
 /**
  * CriticRepository
  *
@@ -34,5 +36,29 @@ ORDER BY c.creationDate DESC
         $query->setMaxResults($limit);
 
         return $query->getResult();
+    }
+
+    /**
+     * Calculate score
+     * 
+     * @param Game $game
+     * @return string
+     */
+    public function calulateScore(Game $game)
+    {
+        if (!$game instanceof Game) {
+            throw new \Exception('Invalid game parameter');
+        }
+        
+        $query = $this->_em->createQuery('
+SELECT AVG(c.score) 
+FROM OCGameCriticBundle:Critic c 
+WHERE c.game = :game
+GROUP BY c.game
+');
+        $query->setParameter('game', $game);
+        $score = $query->getSingleScalarResult();
+
+        return $score;
     }
 }

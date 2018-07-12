@@ -6,3 +6,9 @@ services:
     oc_game_critic.critic_fixtures:
         class: OC\GameCriticBundle\DataFixtures\CriticFixtures
         tags: [doctrine.fixture.orm]
+# Event listener services
+    oc_platform.event_listener.critic:
+        class: OC\GameCriticBundle\EventListener\GameUpdaterSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+

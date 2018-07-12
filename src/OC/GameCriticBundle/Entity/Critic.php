@@ -48,6 +48,13 @@ class Critic
      */
     private $game;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setCreationDate(new \DateTime());
+    }
 
     /**
      * Get id
