@@ -20,7 +20,7 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $games = $em->getRepository('OCGameCriticBundle:Game')->findAll();
+        $games = $em->getRepository('OCGameCriticBundle:Game')->getLatestGames(0, 10);
 
         return $this->render('@OCGameCritic/game/index.html.twig', array(
             'games' => $games,
