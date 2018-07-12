@@ -3,6 +3,7 @@
 namespace OC\GameCriticBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Game
@@ -48,6 +49,12 @@ class Game
      * @ORM\Column(name="release_date", type="date")
      */
     private $releaseDate;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
      /**
      * @ORM\OneToMany(targetEntity="OC\GameCriticBundle\Entity\Critic", mappedBy="game")
@@ -211,5 +218,29 @@ class Game
      */
     public function __toString() {
         return $this->getName();
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Game
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

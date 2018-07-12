@@ -4,7 +4,7 @@ game_index:
     methods:  GET
 
 game_show:
-    path:     /{id}/show
+    path:     /{id}/show/{slug}
     defaults: { _controller: "OCGameCriticBundle:Game:show" }
     methods:  GET
 
