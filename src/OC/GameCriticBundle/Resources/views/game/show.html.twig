@@ -28,6 +28,12 @@
         </tbody>
     </table>
 
+    <h2>Critics</h2>
+
+    {% for critic in critics %}
+        {{ include('@OCGameCritic/critic/critic_details.html.twig', { 'critic': critic }) }}
+    {% endfor %}
+
     <ul>
         <li>
             <a href="{{ path('game_index') }}">Back to the list</a>

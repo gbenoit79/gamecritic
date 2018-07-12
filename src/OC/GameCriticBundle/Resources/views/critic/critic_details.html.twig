@@ -1,0 +1,20 @@
+<table>
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ critic.id }}</td>
+        </tr>
+        <tr>
+            <th>Score</th>
+            <td>{{ critic.score }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ critic.content }}</td>
+        </tr>
+        <tr>
+            <th>Creationdate</th>
+            <td>{% if critic.creationDate %}{{ critic.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
