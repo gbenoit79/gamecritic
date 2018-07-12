@@ -10,4 +10,29 @@ namespace OC\GameCriticBundle\Repository;
  */
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get latest critics
+     * 
+     * @param int $start
+     * @param int $limit
+     * @return array
+     */
+    public function getLatestCritics($start, $limit)
+    {
+        if (!is_int($start) || $start < 0) {
+            throw new \Exception('Invalid start parameter');
+        } elseif (!is_int($limit) || $limit < 1) {
+            throw new \Exception('Invalid limit parameter');
+        }
+        
+        $query = $this->_em->createQuery('
+SELECT c 
+FROM OCGameCriticBundle:Critic c 
+ORDER BY c.creationDate DESC
+');
+        $query->setFirstResult($start);
+        $query->setMaxResults($limit);
+
+        return $query->getResult();
+    }
 }

@@ -57,12 +57,15 @@ class GameController extends Controller
      */
     public function showAction(Game $game)
     {   
+        $em = $this->getDoctrine()->getManager();
+        $critics = $em->getRepository('OCGameCriticBundle:Critic')->getLatestCritics(0, 10);
+        
         $deleteForm = $this->createDeleteForm($game);
 
         return $this->render('@OCGameCritic/game/show.html.twig', array(
-            'game' => $game,
+            'critics' => $critics,
             'delete_form' => $deleteForm->createView(),
-            'critics' => $game->getCritics(),
+            'game' => $game,
         ));
     }
 
