@@ -37,6 +37,16 @@
         </tbody>
     </table>
 
+    <nav aria-label="Pagination des jeux">
+        <ul class="pagination">
+        {% for p in range(1, nbPages) %}
+            <li class="page-item{% if p == page %} active"{% endif %}">
+                <a class="page-link" href="{{ path('oc_game_critic_homepage', {'page': p}) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+
     <ul>
         <li>
             <a href="{{ path('game_new') }}">Create a new game</a>

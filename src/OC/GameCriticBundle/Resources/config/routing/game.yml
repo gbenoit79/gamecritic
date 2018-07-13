@@ -1,8 +1,3 @@
-game_index:
-    path:     /
-    defaults: { _controller: "OCGameCriticBundle:Game:index" }
-    methods:  GET
-
 game_show:
     path:     /{id}/show/{slug}
     defaults: { _controller: "OCGameCriticBundle:Game:show" }

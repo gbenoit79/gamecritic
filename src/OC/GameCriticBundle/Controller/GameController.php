@@ -16,14 +16,24 @@ class GameController extends Controller
      * Lists all game entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page)
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($page < 1) {
+            throw new NotFoundHttpException('Page "'.$page.'" not found');
+        }
 
-        $games = $em->getRepository('OCGameCriticBundle:Game')->getLatestGames(0, 10);
+        $em = $this->getDoctrine()->getManager();
+        $nbPerPage = $this->container->getParameter('nb_per_page');
+        $games = $em->getRepository('OCGameCriticBundle:Game')->getLatestGames($page, $nbPerPage);
+        $nbPages = ceil(count($games) / $nbPerPage);
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("Page ".$page." does not exist");
+        }
 
         return $this->render('@OCGameCritic/game/index.html.twig', array(
             'games' => $games,
+            'nbPages' => $nbPages,
+            'page' => $page,
         ));
     }
 

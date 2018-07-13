@@ -2,6 +2,8 @@
 
 namespace OC\GameCriticBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * GameRepository
  *
@@ -13,16 +15,16 @@ class GameRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Get latest games
      * 
-     * @param int $start
+     * @param int $page
      * @param int $limit
-     * @return array
+     * @return Paginator
      */
-    public function getLatestGames($start, $limit)
+    public function getLatestGames($page, $nbPerPage)
     {
-        if (!is_int($start) || $start < 0) {
-            throw new \Exception('Invalid start parameter');
-        } elseif (!is_int($limit) || $limit < 1) {
-            throw new \Exception('Invalid limit parameter');
+        if ($page < 1) {
+            throw new \Exception('Invalid page parameter');
+        } elseif ($nbPerPage < 1) {
+            throw new \Exception('Invalid nbPerPage parameter');
         }
         
         $query = $this->_em->createQuery('
@@ -30,9 +32,9 @@ SELECT g
 FROM OCGameCriticBundle:Game g 
 ORDER BY g.releaseDate DESC
 ');
-        $query->setFirstResult($start);
-        $query->setMaxResults($limit);
+        $query->setFirstResult(($page - 1) * $nbPerPage);
+        $query->setMaxResults($nbPerPage);
 
-        return $query->getResult();
+        return new Paginator($query, true);
     }
 }
