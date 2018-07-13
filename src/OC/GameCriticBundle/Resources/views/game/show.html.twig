@@ -30,9 +30,25 @@
 
     <h2>Critics</h2>
 
+{% if critics|length == 0 %}
+    Aucune critique pour l'instant.
+{% else %}
     {% for critic in critics %}
         {{ include('@OCGameCritic/critic/critic_details.html.twig', { 'critic': critic }) }}
     {% endfor %}
+{% endif %}
+
+{% if nbPages > 2 %}
+    <nav aria-label="Pagination des critiques">
+        <ul class="pagination">
+        {% for p in range(1, nbPages) %}
+            <li class="page-item{% if p == page %} active"{% endif %}">
+                <a class="page-link" href="{{ path('game_show', {'id': game.id, 'slug': game.slug, 'page': p}) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+{% endif %}
 
     <ul>
         <li>

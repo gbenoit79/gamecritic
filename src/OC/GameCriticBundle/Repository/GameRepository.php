@@ -37,4 +37,19 @@ ORDER BY g.releaseDate DESC
 
         return new Paginator($query, true);
     }
+
+    /**
+     * Get total games
+     *
+     * @return int
+     */
+    public function getTotalGames()
+    {
+        $query = $this->_em->createQuery('
+SELECT COUNT(g) 
+FROM OCGameCriticBundle:Game g 
+');
+
+        return (int) $query->getSingleScalarResult();
+    }
 }

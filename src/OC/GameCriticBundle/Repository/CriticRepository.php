@@ -2,6 +2,7 @@
 
 namespace OC\GameCriticBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use OC\GameCriticBundle\Entity\Game;
 
 /**
@@ -13,29 +14,50 @@ use OC\GameCriticBundle\Entity\Game;
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * Get latest critics
+     * Get latest critics by game
      * 
-     * @param int $start
+     * @param Game $game
+     * @param int $page
      * @param int $limit
      * @return array
      */
-    public function getLatestCritics($start, $limit)
+    public function getLatestCriticsByGame($game, $page, $nbPerPage)
     {
-        if (!is_int($start) || $start < 0) {
-            throw new \Exception('Invalid start parameter');
-        } elseif (!is_int($limit) || $limit < 1) {
-            throw new \Exception('Invalid limit parameter');
+        if ($page < 1) {
+            throw new \Exception('Invalid page parameter');
+        } elseif ($nbPerPage < 1) {
+            throw new \Exception('Invalid nbPerPage parameter');
         }
         
         $query = $this->_em->createQuery('
 SELECT c 
 FROM OCGameCriticBundle:Critic c 
+WHERE c.game = :game 
 ORDER BY c.creationDate DESC
 ');
-        $query->setFirstResult($start);
-        $query->setMaxResults($limit);
+        $query->setParameter('game', $game);
+        $query->setFirstResult(($page - 1) * $nbPerPage);
+        $query->setMaxResults($nbPerPage);
 
-        return $query->getResult();
+        return new Paginator($query, true);
+    }
+
+    /**
+     * Get total critics by game
+     *
+     * @param Game $game
+     * @return int
+     */
+    public function getTotalCriticsByGame(Game $game)
+    {
+        $query = $this->_em->createQuery('
+SELECT COUNT(c) 
+FROM OCGameCriticBundle:Critic c 
+WHERE c.game = :game
+');
+        $query->setParameter('game', $game);
+
+        return (int) $query->getSingleScalarResult();
     }
 
     /**
@@ -45,11 +67,7 @@ ORDER BY c.creationDate DESC
      * @return string
      */
     public function calulateScore(Game $game)
-    {
-        if (!$game instanceof Game) {
-            throw new \Exception('Invalid game parameter');
-        }
-        
+    {        
         $query = $this->_em->createQuery('
 SELECT AVG(c.score) 
 FROM OCGameCriticBundle:Critic c 

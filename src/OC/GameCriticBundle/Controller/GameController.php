@@ -23,11 +23,17 @@ class GameController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $nbPerPage = $this->container->getParameter('nb_per_page');
-        $games = $em->getRepository('OCGameCriticBundle:Game')->getLatestGames($page, $nbPerPage);
-        $nbPages = ceil(count($games) / $nbPerPage);
-        if ($page > $nbPages) {
-            throw $this->createNotFoundException("Page ".$page." does not exist");
+        $totalGames = $em->getRepository('OCGameCriticBundle:Game')->getTotalGames();
+        if ($totalGames > 0) {
+            $nbPerPage = $this->container->getParameter('nb_per_page');
+            $nbPages = ceil($totalGames / $nbPerPage);
+            if ($page > $nbPages) {
+                throw $this->createNotFoundException("Page ".$page." does not exist");
+            }
+            $games = $em->getRepository('OCGameCriticBundle:Game')->getLatestGames($page, $nbPerPage);
+        } else {
+            $games = [];
+            $nbPages = 0;
         }
 
         return $this->render('@OCGameCritic/game/index.html.twig', array(
@@ -65,10 +71,26 @@ class GameController extends Controller
      * Finds and displays a game entity.
      *
      */
-    public function showAction(Game $game)
+    public function showAction(Game $game, $page)
     {   
+        if ($page < 1) {
+            throw new NotFoundHttpException('Page "'.$page.'" not found');
+        }
+        
         $em = $this->getDoctrine()->getManager();
-        $critics = $em->getRepository('OCGameCriticBundle:Critic')->getLatestCritics(0, 10);
+        $totalCritics = $em->getRepository('OCGameCriticBundle:Critic')->getTotalCriticsByGame($game);
+        if ($totalCritics > 0) {
+            $nbPerPage = $this->container->getParameter('nb_per_page');
+            $nbPages = ceil($totalCritics / $nbPerPage);
+            if ($page > $nbPages) {
+                throw $this->createNotFoundException("Page ".$page." does not exist");
+            }
+            $critics = $em->getRepository('OCGameCriticBundle:Critic')->getLatestCriticsByGame($game, $page, $nbPerPage);
+        } else {
+            $critics = [];
+            $nbPages = 0;
+        }
+        
         
         $deleteForm = $this->createDeleteForm($game);
 
@@ -76,6 +98,8 @@ class GameController extends Controller
             'critics' => $critics,
             'delete_form' => $deleteForm->createView(),
             'game' => $game,
+            'nbPages' => $nbPages,
+            'page' => $page,
         ));
     }
 
