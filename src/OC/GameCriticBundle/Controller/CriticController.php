@@ -3,6 +3,7 @@
 namespace OC\GameCriticBundle\Controller;
 
 use OC\GameCriticBundle\Entity\Critic;
+use OC\GameCriticBundle\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,18 +23,19 @@ class CriticController extends Controller
 
         $critics = $em->getRepository('OCGameCriticBundle:Critic')->findAll();
 
-        return $this->render('@OCGameCritic/critic/index.html.twig', array(
+        return $this->render('@OCGameCritic/critic/index.html.twig', [
             'critics' => $critics,
-        ));
+        ]);
     }
 
     /**
      * Creates a new critic entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Game $game, Request $request)
     {
         $critic = new Critic();
+        $critic->setGame($game);
         $form = $this->createForm('OC\GameCriticBundle\Form\CriticType', $critic);
         $form->handleRequest($request);
 
@@ -42,12 +44,15 @@ class CriticController extends Controller
             $em->persist($critic);
             $em->flush();
 
-            return $this->redirectToRoute('critic_show', array('id' => $critic->getId()));
+            $request->getSession()->getFlashBag()->add('success', 'Critique bien enregistrée.');
+
+            return $this->redirectToRoute('game_show', ['id' => $game->getId(), 'slug' => $game->getSlug()]);
         }
 
         return $this->render('@OCGameCritic/critic/new.html.twig', array(
             'critic' => $critic,
             'form' => $form->createView(),
+            'game' => $game,
         ));
     }
 

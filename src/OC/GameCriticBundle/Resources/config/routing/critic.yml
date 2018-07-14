@@ -9,7 +9,7 @@ critic_show:
     methods:  GET
 
 critic_new:
-    path:     /new
+    path:     /new/{id}
     defaults: { _controller: "OCGameCriticBundle:Critic:new" }
     methods:  [GET, POST]
 

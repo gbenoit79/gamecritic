@@ -52,7 +52,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('critic_new') }}">Ecrire une critique</a>
+            <a href="{{ path('critic_new', {'id': game.id}) }}">Ecrire une critique</a>
         </li>
         <li>
             <a href="{{ path('oc_game_critic_homepage') }}">Back to the list</a>

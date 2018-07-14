@@ -53,6 +53,7 @@ class Critic
      */
     public function __construct()
     {
+        $this->setScore('5');
         $this->setCreationDate(new \DateTime());
     }
 
