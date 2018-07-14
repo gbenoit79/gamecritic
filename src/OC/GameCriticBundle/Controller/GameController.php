@@ -26,7 +26,7 @@ class GameController extends Controller
         $totalGames = $em->getRepository('OCGameCriticBundle:Game')->getTotalGames();
         if ($totalGames > 0) {
             $nbPerPage = $this->container->getParameter('nb_per_page');
-            $nbPages = ceil($totalGames / $nbPerPage);
+            $nbPages = (int) ceil($totalGames / $nbPerPage);
             if ($page > $nbPages) {
                 throw $this->createNotFoundException("Page ".$page." does not exist");
             }
@@ -58,7 +58,9 @@ class GameController extends Controller
             $em->persist($game);
             $em->flush();
 
-            return $this->redirectToRoute('game_show', array('id' => $game->getId()));
+            $request->getSession()->getFlashBag()->add('success', 'Jeu bien enregistré.');
+
+            return $this->redirectToRoute('game_show', array('id' => $game->getId(), 'slug' => $game->getSlug()));
         }
 
         return $this->render('@OCGameCritic/game/new.html.twig', array(
@@ -81,7 +83,7 @@ class GameController extends Controller
         $totalCritics = $em->getRepository('OCGameCriticBundle:Critic')->getTotalCriticsByGame($game);
         if ($totalCritics > 0) {
             $nbPerPage = $this->container->getParameter('nb_per_page');
-            $nbPages = ceil($totalCritics / $nbPerPage);
+            $nbPages = (int) ceil($totalCritics / $nbPerPage);
             if ($page > $nbPages) {
                 throw $this->createNotFoundException("Page ".$page." does not exist");
             }

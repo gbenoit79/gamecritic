@@ -36,7 +36,9 @@ class CriticType extends AbstractType
                 'label' => 'Critique',
             ])
         ;
-    }/**
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

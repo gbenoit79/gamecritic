@@ -51,6 +51,11 @@ class Game
     private $releaseDate;
 
     /**
+     * @ORM\OneToOne(targetEntity="OC\GameCriticBundle\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
@@ -242,5 +247,29 @@ class Game
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \OC\GameCriticBundle\Entity\Image $image
+     *
+     * @return Game
+     */
+    public function setImage(\OC\GameCriticBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \OC\GameCriticBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

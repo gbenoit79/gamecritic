@@ -10,6 +10,12 @@
                 <td>{{ game.id }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+                <td>
+                    {% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Name</th>
                 <td>{{ game.name }}</td>
             </tr>
@@ -38,7 +44,7 @@
     {% endfor %}
 {% endif %}
 
-{% if nbPages > 2 %}
+{% if nbPages > 1 %}
     <nav aria-label="Pagination des critiques">
         <ul class="pagination">
         {% for p in range(1, nbPages) %}

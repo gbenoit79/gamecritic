@@ -2,6 +2,7 @@
 
 namespace OC\GameCriticBundle\Form;
 
+use OC\GameCriticBundle\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,8 +14,16 @@ class GameType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('description')->add('score')->add('releaseDate');
-    }/**
+        $builder
+            ->add('name')
+            ->add('description')
+            ->add('score')
+            ->add('releaseDate')
+            ->add('image', ImageType::class)
+        ;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Score</th>
@@ -18,6 +19,7 @@
         {% for game in games %}
             <tr>
                 <td><a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.id }}</a></td>
+                <td>{% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}</td>
                 <td>{{ game.name }}</td>
                 <td>{{ game.description }}</td>
                 <td>{{ game.score }}</td>
@@ -37,7 +39,7 @@
         </tbody>
     </table>
 
-{% if nbPages > 2 %}
+{% if nbPages > 1 %}
     <nav aria-label="Pagination des jeux">
         <ul class="pagination">
         {% for p in range(1, nbPages) %}
