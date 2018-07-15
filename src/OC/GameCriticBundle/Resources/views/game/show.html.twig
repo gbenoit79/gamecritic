@@ -17,11 +17,11 @@
             </tr>
             <tr>
                 <th>Name</th>
-                <td>{{ game.name }}</td>
+                <td>{{ game.name|escape }}</td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ game.description }}</td>
+                <td>{{ game.description|escape }}</td>
             </tr>
             <tr>
                 <th>Score</th>

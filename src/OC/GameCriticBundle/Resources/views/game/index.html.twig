@@ -20,8 +20,8 @@
             <tr>
                 <td><a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.id }}</a></td>
                 <td>{% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}</td>
-                <td>{{ game.name }}</td>
-                <td>{{ game.description }}</td>
+                <td>{{ game.name|escape }}</td>
+                <td>{{ game.description|escape }}</td>
                 <td>{{ game.score }}</td>
                 <td>{% if game.releaseDate %}{{ game.releaseDate|date('Y-m-d') }}{% endif %}</td>
                 <td>
