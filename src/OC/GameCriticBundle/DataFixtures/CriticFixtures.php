@@ -31,8 +31,9 @@ class CriticFixtures extends Fixture
             $critic->setCreationDate(new \DateTime());
             $critic->setGame($this->getReference(GameFixtures::GOW_GAME_REFERENCE));
             $manager->persist($critic);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 
     public function getDependencies()

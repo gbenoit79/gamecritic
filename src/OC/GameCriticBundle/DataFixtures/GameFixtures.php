@@ -30,6 +30,18 @@ class GameFixtures extends Fixture
                 'score' => '7.9',
                 'releaseDate' => new \DateTime('2018-01-26'),
             ],
+            [
+                'name' => 'Persona 5',
+                'description' => "Dans Persona 5, le joueur incarne un étudiant fraîchement transféré au lycée Shujin de Tokyo. Au cours de l'année scolaire, lui et ses camarades deviendront des justiciers masqués, surnommés les \"Phantom Thieves\". A vous de combattre l'injustice avec style, tout en gérant votre emploi du temps.",
+                'score' => '8.9',
+                'releaseDate' => new \DateTime('2017-04-04'),
+            ],
+            [
+                'name' => 'The Legend of Zelda : Breath of the Wild',
+                'description' => "Après un long sommeil, Link se réveille seul dans un monde qu'il ne reconnaît pas. Il devra explorer un territoire aussi vaste que dangereux afin de retrouver la mémoire. En quête de réponses, il devra se servir de tout ce qui se trouve sur sa route pour survivre.",
+                'score' => '8.9',
+                'releaseDate' => new \DateTime('2017-03-03'),
+            ],
         ];
 
         foreach ($gamesData as $data) {
@@ -39,11 +51,12 @@ class GameFixtures extends Fixture
             $game->setScore($data['score']);
             $game->setReleaseDate($data['releaseDate']);
             $manager->persist($game);
-            $manager->flush();
 
             if ($game->getName() === 'God of War') {
                 $this->addReference(self::GOW_GAME_REFERENCE, $game);
             }
         }
+
+        $manager->flush();
     }
 }
