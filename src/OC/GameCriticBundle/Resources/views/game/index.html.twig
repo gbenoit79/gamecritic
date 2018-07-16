@@ -1,7 +1,7 @@
 {% extends '@OCGameCritic/layout.html.twig' %}
 
 {% block body %}
-    <h1>Games list</h1>
+    <h1>Nouveaux jeux</h1>
 
     <table>
         <thead>
@@ -29,9 +29,11 @@
                         <li>
                             <a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">show</a>
                         </li>
+                    {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="{{ path('game_edit', { 'id': game.id }) }}">edit</a>
                         </li>
+                    {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -53,7 +55,16 @@
 
     <ul>
         <li>
-            <a href="{{ path('game_new') }}">Create a new game</a>
+        {% if app.user %}
+            <a href="{{ path('logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('login') }}">Se connecter</a>
+        {% endif %}
         </li>
+    {% if is_granted('ROLE_ADMIN') %}
+        <li>
+            <a href="{{ path('game_new') }}">Ajouter un jeu</a>
+        </li>
+    {% endif %}
     </ul>
 {% endblock %}

@@ -5,7 +5,8 @@
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
-            "OC\\GameCriticBundle\\": "src/OC/GameCriticBundle"
+            "OC\\GameCriticBundle\\": "src/OC/GameCriticBundle",
+            "OC\\UserBundle\\": "src/OC/UserBundle"
         },
         "classmap": [
             "app/AppKernel.php",

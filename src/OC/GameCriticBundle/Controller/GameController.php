@@ -3,6 +3,7 @@
 namespace OC\GameCriticBundle\Controller;
 
 use OC\GameCriticBundle\Entity\Game;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -45,7 +46,8 @@ class GameController extends Controller
 
     /**
      * Creates a new game entity.
-     *
+     * 
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
@@ -93,7 +95,6 @@ class GameController extends Controller
             $nbPages = 0;
         }
         
-        
         $deleteForm = $this->createDeleteForm($game);
 
         return $this->render('@OCGameCritic/game/show.html.twig', array(
@@ -108,6 +109,7 @@ class GameController extends Controller
     /**
      * Displays a form to edit an existing game entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, Game $game)
     {
@@ -130,7 +132,8 @@ class GameController extends Controller
 
     /**
      * Deletes a game entity.
-     *
+     * 
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Game $game)
     {

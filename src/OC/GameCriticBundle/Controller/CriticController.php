@@ -4,6 +4,7 @@ namespace OC\GameCriticBundle\Controller;
 
 use OC\GameCriticBundle\Entity\Critic;
 use OC\GameCriticBundle\Entity\Game;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,6 +32,7 @@ class CriticController extends Controller
     /**
      * Creates a new critic entity.
      *
+     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Game $game, Request $request)
     {
@@ -73,6 +75,7 @@ class CriticController extends Controller
     /**
      * Displays a form to edit an existing critic entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, Critic $critic)
     {
@@ -96,6 +99,7 @@ class CriticController extends Controller
     /**
      * Deletes a critic entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Critic $critic)
     {
