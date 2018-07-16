@@ -12,21 +12,25 @@ class UserFixtures extends Fixture
         $usersData = [
             [
                 'username' => 'guillaume',
+                'email' => 'guillaume@gmail.com',
                 'password' => 'userpass',
                 'roles' => ['ROLE_USER'],
             ],
             [
                 'username' => 'antoine',
+                'email' => 'antoine@gmail.com',
                 'password' => 'userpass',
                 'roles' => ['ROLE_USER'],
             ],
             [
                 'username' => 'didier',
+                'email' => 'didier@gmail.com',
                 'password' => 'userpass',
                 'roles' => ['ROLE_USER'],
             ],
             [
                 'username' => 'admin',
+                'email' => 'admin@gmail.com',
                 'password' => 'adminpass',
                 'roles' => ['ROLE_ADMIN'],
             ],
@@ -35,9 +39,10 @@ class UserFixtures extends Fixture
         foreach ($usersData as $data) {
             $user = new User;
             $user->setUsername($data['username']);
-            $user->setPassword($data['password']);
-            $user->setSalt('');
+            $user->setEmail($data['email']);
+            $user->setPlainPassword($data['password']);
             $user->setRoles($data['roles']);
+            $user->setEnabled(true);
             $manager->persist($user);
         }
 
