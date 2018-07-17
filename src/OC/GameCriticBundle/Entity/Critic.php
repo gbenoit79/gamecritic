@@ -49,6 +49,11 @@ class Critic
     private $game;
 
     /**
+     * @ORM\ManyToOne(targetEntity="OC\UserBundle\Entity\User")
+     */
+    private $user;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -161,5 +166,29 @@ class Critic
     public function getGame()
     {
         return $this->game;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \OC\UserBundle\Entity\User $user
+     *
+     * @return Critic
+     */
+    public function setUser(\OC\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \OC\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

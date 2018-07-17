@@ -1,5 +1,1 @@
 services:
-# Fixtures services
-    oc_user.user_fixtures:
-        class: OC\UserBundle\DataFixtures\UserFixtures
-        tags: [doctrine.fixture.orm]

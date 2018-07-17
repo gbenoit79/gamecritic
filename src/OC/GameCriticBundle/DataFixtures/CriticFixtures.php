@@ -15,6 +15,10 @@ class CriticFixtures extends Fixture
                 'content' => "C'est un excellent jeu !",
             ],
             [
+                'score' => '8',
+                'content' => "C'est un très bon jeu !",
+            ],
+            [
                 'score' => '7',
                 'content' => "C'est un bon jeu !",
             ],
@@ -29,7 +33,8 @@ class CriticFixtures extends Fixture
             $critic->setScore($data['score']);
             $critic->setContent($data['content']);
             $critic->setCreationDate(new \DateTime());
-            $critic->setGame($this->getReference(GameFixtures::GOW_GAME_REFERENCE));
+            $critic->setGame($this->getReference(GameFixtures::GOD_OF_WAR_GAME_REFERENCE));
+            $critic->setUser($this->getReference(UserFixtures::GUILLAUME_USER_REFERENCE));
             $manager->persist($critic);
         }
 
@@ -39,6 +44,7 @@ class CriticFixtures extends Fixture
     public function getDependencies()
     {
         return array(
+            UserFixtures::class,
             GameFixtures::class,
         );
     }

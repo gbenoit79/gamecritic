@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class GameFixtures extends Fixture
 {
-    const GOW_GAME_REFERENCE = 'gow-game';
+    const GOD_OF_WAR_GAME_REFERENCE = 'god-of-war-game';
     
     public function load(ObjectManager $manager)
     {
@@ -53,7 +53,7 @@ class GameFixtures extends Fixture
             $manager->persist($game);
 
             if ($game->getName() === 'God of War') {
-                $this->addReference(self::GOW_GAME_REFERENCE, $game);
+                $this->addReference(self::GOD_OF_WAR_GAME_REFERENCE, $game);
             }
         }
 

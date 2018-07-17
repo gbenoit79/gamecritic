@@ -1,5 +1,8 @@
 services:
 # Fixtures services
+    oc_game_critic.user_fixtures:
+        class: OC\GameCriticBundle\DataFixtures\UserFixtures
+        tags: [doctrine.fixture.orm]
     oc_game_critic.game_fixtures:
         class: OC\GameCriticBundle\DataFixtures\GameFixtures
         tags: [doctrine.fixture.orm]
@@ -11,4 +14,3 @@ services:
         class: OC\GameCriticBundle\EventListener\GameUpdaterSubscriber
         tags:
             - { name: doctrine.event_subscriber, connection: default }
-

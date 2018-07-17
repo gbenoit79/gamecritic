@@ -1,5 +1,5 @@
 <?php
-namespace OC\UserBundle\DataFixtures;
+namespace OC\GameCriticBundle\DataFixtures;
 
 use OC\UserBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
+    const GUILLAUME_USER_REFERENCE = 'guillaume-user';
+
     public function load(ObjectManager $manager)
     {
         $usersData = [
@@ -44,6 +46,10 @@ class UserFixtures extends Fixture
             $user->setRoles($data['roles']);
             $user->setEnabled(true);
             $manager->persist($user);
+
+            if ($data['username'] === 'guillaume') {
+                $this->addReference(self::GUILLAUME_USER_REFERENCE, $user);
+            }
         }
 
         $manager->flush();

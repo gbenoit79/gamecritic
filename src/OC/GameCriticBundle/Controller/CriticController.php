@@ -38,6 +38,7 @@ class CriticController extends Controller
     {
         $critic = new Critic();
         $critic->setGame($game);
+        $critic->setUser($this->getUser());
         $form = $this->createForm('OC\GameCriticBundle\Form\CriticType', $critic);
         $form->handleRequest($request);
 

@@ -13,6 +13,10 @@
             <td>{{ critic.content|escape }}</td>
         </tr>
         <tr>
+            <th>User</th>
+            <td>{% if critic.user %}{{ critic.user.username }}{% endif %}</td>
+        </tr>
+        <tr>
             <th>Creationdate</th>
             <td>{% if critic.creationDate %}{{ critic.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
         </tr>
