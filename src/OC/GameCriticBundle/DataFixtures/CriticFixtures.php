@@ -33,7 +33,7 @@ class CriticFixtures extends Fixture
             $critic->setScore($data['score']);
             $critic->setContent($data['content']);
             $critic->setCreationDate(new \DateTime());
-            $critic->setGame($this->getReference(GameFixtures::GOD_OF_WAR_GAME_REFERENCE));
+            $critic->setGame($this->getReference('god-of-war-game'));
             $critic->setUser($this->getReference(UserFixtures::GUILLAUME_USER_REFERENCE));
             $manager->persist($critic);
         }
