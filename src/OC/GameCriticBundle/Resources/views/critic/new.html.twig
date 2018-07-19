@@ -1,6 +1,6 @@
 {% extends '@OCGameCritic/layout.html.twig' %}
 
-{% block body %}
+{% block ocgamecritic_body %}
     <h2>Ecrire une critique pour le jeu <em>{{ game.name }}</em></h2>
 
     {{ form_start(form) }}
@@ -8,9 +8,11 @@
         <input type="submit" value="Valider" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('game_show', {'id': game.id, 'slug': game.slug}) }}">Retour au jeu</a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('game_show', {'id': game.id, 'slug': game.slug}) }}">Retour au jeu</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

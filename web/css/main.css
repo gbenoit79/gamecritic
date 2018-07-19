@@ -26,7 +26,8 @@ a, a:visited, a:hover, a:focus, a:active {
 }
 
 nav {
-    margin-bottom: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
 }
 
 ul {
