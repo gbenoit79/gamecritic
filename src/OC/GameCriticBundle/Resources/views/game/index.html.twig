@@ -8,10 +8,11 @@
             <tr>
                 <th>Id</th>
                 <th>Image</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Score</th>
-                <th>Releasedate</th>
+                <th>Note</th>
+                <th>Plate-formes</th>
+                <th>Date de sortie</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ game.name|escape }}</td>
                 <td>{{ game.description|escape }}</td>
                 <td>{{ game.score }}</td>
+                <td>{{ game.platforms|join(', ') }}</td>
                 <td>{% if game.releaseDate %}{{ game.releaseDate|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>

@@ -67,6 +67,11 @@ class Game
     private $critics;
 
     /**
+     * @ORM\ManyToMany(targetEntity="OC\GameCriticBundle\Entity\Platform", cascade={"persist"})
+     */
+    private $platforms;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -271,5 +276,39 @@ class Game
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add platform
+     *
+     * @param \OC\GameCriticBundle\Entity\Platform $platform
+     *
+     * @return Game
+     */
+    public function addPlatform(\OC\GameCriticBundle\Entity\Platform $platform)
+    {
+        $this->platforms[] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Remove platform
+     *
+     * @param \OC\GameCriticBundle\Entity\Platform $platform
+     */
+    public function removePlatform(\OC\GameCriticBundle\Entity\Platform $platform)
+    {
+        $this->platforms->removeElement($platform);
+    }
+
+    /**
+     * Get platforms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlatforms()
+    {
+        return $this->platforms;
     }
 }

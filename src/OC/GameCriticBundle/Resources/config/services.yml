@@ -6,6 +6,9 @@ services:
     oc_game_critic.image_fixtures:
         class: OC\GameCriticBundle\DataFixtures\ImageFixtures
         tags: [doctrine.fixture.orm]
+    oc_game_critic.platform_fixtures:
+        class: OC\GameCriticBundle\DataFixtures\PlatformFixtures
+        tags: [doctrine.fixture.orm]
     oc_game_critic.game_fixtures:
         class: OC\GameCriticBundle\DataFixtures\GameFixtures
         tags: [doctrine.fixture.orm]
