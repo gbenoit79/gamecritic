@@ -13,7 +13,7 @@
             <div>
                 <a class="game-name" href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.name|escape }}</a> 
                 {% if game.releaseDate %}({{ game.releaseDate|date('Y') }}){% endif %}
-                <p>
+                <p class="game-description">
                     {{ game.description|escape|truncate(140, true)|raw }}
                 </p>
                 <div class="score float-right">{{ game.score|number_format(1, ',', '') }}</div>

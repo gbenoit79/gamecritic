@@ -17,12 +17,20 @@ footer {
     text-align: center;
     background-color: #f9f9f9;
     border-top: 1px solid #e5e5e5;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 a, a:visited, a:hover, a:focus, a:active {
     color: #0275d8;
     text-decoration: none;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+ul {
+    margin-bottom: 0;
 }
 
 .sidebar-module {
@@ -32,10 +40,6 @@ a, a:visited, a:hover, a:focus, a:active {
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 10px;
-}
-
-ul {
-    margin-bottom: 0;
 }
 
 .game {
@@ -63,6 +67,9 @@ ul {
     color: #666;
     font-size: 0.9em;
 }
+.game-description {
+    text-align: justify;
+}
 
 .critic {
     margin-bottom: 20px;
@@ -72,6 +79,8 @@ ul {
 }
 .critic-content {
     margin-left: 20px;
+    width: 95%;
+    text-align: justify;
 }
 
 .pagination {
