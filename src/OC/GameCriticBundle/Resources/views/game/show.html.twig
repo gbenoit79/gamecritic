@@ -7,40 +7,25 @@
 {% block ocgamecritic_body %}
     <h2>{{ game.name|escape }}</h2>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ game.id }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>
-                    {% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ game.name|escape }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ game.description|escape }}</td>
-            </tr>
-            <tr>
-                <th>Note</th>
-                <td>{{ game.score }}</td>
-            </tr>
-            <tr>
-                <th>Plate-formes</th>
-                <td>{{ game.platforms|join(', ') }}</td>
-            </tr>
-            <tr>
-                <th>Date de sortie</th>
-                <td>{% if game.releaseDate %}{{ game.releaseDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="game">
+    {% if game.image %}
+        <div class="game-image">
+            <a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}"><img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" /></a>
+        </div>
+    {% endif %}
+        <div>
+            <p class="game-infos">
+                Plate-forme{% if game.platforms|length > 1 %}s{% endif %} : {{ game.platforms|join(', ') }}<br />
+            {% if game.releaseDate %}
+                Date de sortie : {{ game.releaseDate|date('d/m/Y') }}
+            {% endif %}
+            </p>
+            <p class="game-description">
+                {{ game.description|escape }}
+            </p>
+            <div class="score float-right">{{ game.score|number_format(1, ',', '') }}</div>
+        </div>
+    </div>
 
     <h3>Critiques</h3>
 
@@ -54,12 +39,14 @@
 
     {% include '@OCGameCritic/_pagination.html.twig' %}
 
-    <ul>
-        <li>
-            <a href="{{ path('critic_new', {'id': game.id}) }}">Ecrire une critique</a>
-        </li>
-        <li>
-            <a href="{{ path('oc_game_critic_homepage') }}">Retour à la liste</a>
-        </li>
-    </ul>
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ path('critic_new', {'id': game.id}) }}">Ecrire une critique</a>
+            </li>
+            <li>
+                <a href="{{ path('oc_game_critic_homepage') }}">Retour à la liste</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

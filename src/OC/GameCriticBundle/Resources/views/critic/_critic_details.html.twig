@@ -1,24 +1,16 @@
-<table>
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ critic.id }}</td>
-        </tr>
-        <tr>
-            <th>Score</th>
-            <td>{{ critic.score }}</td>
-        </tr>
-        <tr>
-            <th>Content</th>
-            <td>{{ critic.content|escape }}</td>
-        </tr>
-        <tr>
-            <th>User</th>
-            <td>{% if critic.user %}{{ critic.user.username }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Creationdate</th>
-            <td>{% if critic.creationDate %}{{ critic.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="critic">
+    <div class="critic-header">
+        <h4>
+            {% if critic.user %}<em>{{ critic.user.username }}</em>{% endif %}
+            {% if critic.creationDate %} le <em>{{ critic.creationDate|date('d/m/Y à H\\hi') }}</em>{% endif %}
+        </h4>
+    </div>
+    <div class="critic-body">
+        <div class="score">
+            {{ critic.score|number_format(0) }}
+        </div>
+        <div class="critic-content">
+            {{ critic.content|escape }}
+        </div>
+    </div>
+</div>

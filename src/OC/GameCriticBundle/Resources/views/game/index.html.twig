@@ -3,55 +3,23 @@
 {% block ocgamecritic_body %}
     <h2>Nouveaux jeux</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Note</th>
-                <th>Plate-formes</th>
-                <th>Date de sortie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for game in games %}
-            <tr>
-                <td><a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.id }}</a></td>
-                <td>{% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}</td>
-                <td>{{ game.name|escape }}</td>
-                <td>{{ game.description|escape }}</td>
-                <td>{{ game.score }}</td>
-                <td>{{ game.platforms|join(', ') }}</td>
-                <td>{% if game.releaseDate %}{{ game.releaseDate|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% for game in games %}
+        <div class="game">
+        {% if game.image %}
+            <div class="game-image">
+                <a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}"><img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" /></a>
+            </div>
+        {% endif %}
+            <div>
+                <a class="game-name" href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.name|escape }}</a> 
+                {% if game.releaseDate %}({{ game.releaseDate|date('Y') }}){% endif %}
+                <p>
+                    {{ game.description|escape|truncate(140, true)|raw }}
+                </p>
+                <div class="score float-right">{{ game.score|number_format(1, ',', '') }}</div>
+            </div>
+        </div>
+    {% endfor %}
 
     {% include '@OCGameCritic/_pagination.html.twig' %}
-
-    <ul>
-        <li>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
-        {% else %}
-            <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
-        {% endif %}
-        </li>
-    {% if is_granted('ROLE_ADMIN') %}
-        <li>
-            <a href="{{ path('admin_game_index') }}">Administration</a>
-        </li>
-    {% endif %}
-    </ul>
 {% endblock %}
