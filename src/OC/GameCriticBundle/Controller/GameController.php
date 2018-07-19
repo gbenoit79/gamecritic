@@ -39,35 +39,11 @@ class GameController extends Controller
 
         return $this->render('@OCGameCritic/game/index.html.twig', array(
             'games' => $games,
-            'nbPages' => $nbPages,
-            'page' => $page,
-        ));
-    }
-
-    /**
-     * Creates a new game entity.
-     * 
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function newAction(Request $request)
-    {
-        $game = new Game();
-        $form = $this->createForm('OC\GameCriticBundle\Form\GameType', $game);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($game);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('success', 'Jeu bien enregistré.');
-
-            return $this->redirectToRoute('game_show', array('id' => $game->getId(), 'slug' => $game->getSlug()));
-        }
-
-        return $this->render('@OCGameCritic/game/new.html.twig', array(
-            'game' => $game,
-            'form' => $form->createView(),
+            'pagination' => [
+                'nbPages' => $nbPages,
+                'page' => $page,
+                'path' => 'oc_game_critic_homepage',
+            ],
         ));
     }
 
@@ -94,74 +70,19 @@ class GameController extends Controller
             $critics = [];
             $nbPages = 0;
         }
-        
-        $deleteForm = $this->createDeleteForm($game);
 
         return $this->render('@OCGameCritic/game/show.html.twig', array(
             'critics' => $critics,
-            'delete_form' => $deleteForm->createView(),
             'game' => $game,
-            'nbPages' => $nbPages,
-            'page' => $page,
+            'pagination' => [
+                'nbPages' => $nbPages,
+                'page' => $page,
+                'path' => 'game_show',
+                'pathParams' => [
+                    'id' => $game->getId(),
+                    'slug' => $game->getSlug(),
+                ],
+            ],
         ));
-    }
-
-    /**
-     * Displays a form to edit an existing game entity.
-     *
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function editAction(Request $request, Game $game)
-    {
-        $deleteForm = $this->createDeleteForm($game);
-        $editForm = $this->createForm('OC\GameCriticBundle\Form\GameType', $game);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('game_edit', array('id' => $game->getId()));
-        }
-
-        return $this->render('@OCGameCritic/game/edit.html.twig', array(
-            'game' => $game,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Deletes a game entity.
-     * 
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function deleteAction(Request $request, Game $game)
-    {
-        $form = $this->createDeleteForm($game);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($game);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('game_index');
-    }
-
-    /**
-     * Creates a form to delete a game entity.
-     *
-     * @param Game $game The game entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Game $game)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('game_delete', array('id' => $game->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 }

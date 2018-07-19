@@ -1,0 +1,51 @@
+{% extends '@OCGameCritic/admin/layout.html.twig' %}
+
+{% block title %}
+  Liste des jeux - {{ parent() }}
+{% endblock %}
+
+{% block ocgamecritic_admin_body %}
+    <h2>Liste des critiques</h2>
+
+    <ul>
+        <li><a href="{{ path('admin_critic_new') }}">Ajouter une critique</a></li>
+    </ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jeu</th>
+                <th>Auteur</th>
+                <th>Note</th>
+                <th>Contenu</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for critic in critics %}
+            <tr>
+                <td>{{ critic.id }}</td>
+                <td>{{ critic.game.name }}</td>
+                <td>{{ critic.user.username }}</td>
+                <td>{{ critic.score }}</td>
+                <td>{{ critic.content|escape }}</td>
+                <td>{% if critic.creationDate %}{{ critic.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_critic_edit', { 'id': critic.id }) }}">Modifier</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_critic_delete', { 'id': critic.id }) }}">Supprimer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include '@OCGameCritic/_pagination.html.twig' %}
+{% endblock %}

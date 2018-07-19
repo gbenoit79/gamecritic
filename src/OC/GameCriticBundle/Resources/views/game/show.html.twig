@@ -1,7 +1,11 @@
 {% extends '@OCGameCritic/layout.html.twig' %}
 
-{% block body %}
-    <h1>Game</h1>
+{% block title %}
+  {{ game.name|escape }} - {{ parent() }}
+{% endblock %}
+
+{% block ocgamecritic_body %}
+    <h2>{{ game.name|escape }}</h2>
 
     <table>
         <tbody>
@@ -34,27 +38,17 @@
         </tbody>
     </table>
 
-    <h2>Critics</h2>
+    <h3>Critiques</h3>
 
 {% if critics|length == 0 %}
     Aucune critique pour l'instant.
 {% else %}
     {% for critic in critics %}
-        {{ include('@OCGameCritic/critic/critic_details.html.twig', { 'critic': critic }) }}
+        {{ include('@OCGameCritic/critic/_critic_details.html.twig', { 'critic': critic }) }}
     {% endfor %}
 {% endif %}
 
-{% if nbPages > 1 %}
-    <nav aria-label="Pagination des critiques">
-        <ul class="pagination">
-        {% for p in range(1, nbPages) %}
-            <li class="page-item{% if p == page %} active"{% endif %}">
-                <a class="page-link" href="{{ path('game_show', {'id': game.id, 'slug': game.slug, 'page': p}) }}">{{ p }}</a>
-            </li>
-        {% endfor %}
-        </ul>
-    </nav>
-{% endif %}
+    {% include '@OCGameCritic/_pagination.html.twig' %}
 
     <ul>
         <li>
@@ -63,15 +57,5 @@
         <li>
             <a href="{{ path('oc_game_critic_homepage') }}">Retour à la liste</a>
         </li>
-    {% if is_granted('ROLE_ADMIN') %}
-        <li>
-            <a href="{{ path('game_edit', { 'id': game.id }) }}">Modifier le jeu</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer le jeu">
-            {{ form_end(delete_form) }}
-        </li>
-    {% endif %}
     </ul>
 {% endblock %}

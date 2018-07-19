@@ -1,0 +1,17 @@
+{% extends '@OCGameCritic/layout.html.twig' %}
+
+{% block body %}
+    <h1>Administration de GameCritic</h1>
+    <hr>
+
+    <ul>
+        <li><a href="{{ path('admin_game_index') }}">Gérer les jeux</a></li>
+        <li><a href="{{ path('admin_critic_index') }}">Gérer les critiques</a></li>
+        <li><a href="{{ path('oc_game_critic_homepage') }}">Aller sur le site</a></li>
+    </ul>
+
+    {% block ocgamecritic_admin_body %}
+    {% endblock %}
+{% endblock %}
+
+{% block title %}Administration - GameCritic{% endblock %}

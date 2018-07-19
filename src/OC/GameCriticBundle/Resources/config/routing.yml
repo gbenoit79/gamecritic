@@ -12,3 +12,7 @@ oc_game_critic_homepage:
     requirements:
         page: '\d+'
     methods:  GET
+
+oc_game_critic_admin:
+    resource: "@OCGameCriticBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin

@@ -1,0 +1,21 @@
+{% extends '@OCGameCritic/admin/layout.html.twig' %}
+
+{% block title %}
+  Supprimer une critique - {{ parent() }}
+{% endblock %}
+
+{% block ocgamecritic_admin_body %}
+    <h2>Supprimer une critique</h2>
+
+    <p>
+        Etes-vous certain de vouloir supprimer la critique de <em>{{ critic.user }}</em> pour le jeu <em>{{ critic.game }}</em> ayant comme id <em>{{ critic.id }}</em> ?
+    </p>
+
+    <form action="{{ path('admin_critic_delete', {'id': critic.id}) }}" method="post">
+        <a href="{{ path('admin_critic_index') }}" class="btn btn-default">
+            Annuler
+        </a>
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% if pagination.nbPages > 1 %}
+    <nav aria-label="Pagination">
+        <ul class="pagination">
+        {% for p in range(1, pagination.nbPages) %}
+            <li class="page-item{% if p == pagination.page %} active"{% endif %}">
+                <a class="page-link" href="{% if pagination.pathParams is defined %}{{ path(pagination.path, {'page': p}|merge(pagination.pathParams)) }}{% else %}{{ path(pagination.path, {'page': p}) }}{% endif %}">{{ p }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+{% endif %}

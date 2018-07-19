@@ -4,18 +4,3 @@ game_show:
     requirements:
         page: '\d+'
     methods:  GET
-
-game_new:
-    path:     /new
-    defaults: { _controller: "OCGameCriticBundle:Game:new" }
-    methods:  [GET, POST]
-
-game_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "OCGameCriticBundle:Game:edit" }
-    methods:  [GET, POST]
-
-game_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "OCGameCriticBundle:Game:delete" }
-    methods:  DELETE

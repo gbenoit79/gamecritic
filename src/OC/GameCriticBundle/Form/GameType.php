@@ -19,7 +19,7 @@ class GameType extends AbstractType
             ->add('description')
             ->add('score')
             ->add('releaseDate')
-            ->add('image', ImageType::class)
+            ->add('image', ImageType::class, array('required'=>false))
         ;
     }
     

@@ -1,24 +1,32 @@
-{% extends '@OCGameCritic/layout.html.twig' %}
+{% extends '@OCGameCritic/admin/layout.html.twig' %}
 
-{% block ocgamecritic_body %}
-    <h2>Nouveaux jeux</h2>
+{% block title %}
+  Liste des jeux - {{ parent() }}
+{% endblock %}
+
+{% block ocgamecritic_admin_body %}
+    <h2>Liste des jeux</h2>
+
+    <ul>
+        <li><a href="{{ path('admin_game_new') }}">Ajouter un jeu</a></li>
+    </ul>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Image</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Score</th>
-                <th>Releasedate</th>
+                <th>Note</th>
+                <th>Date de sortie</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for game in games %}
             <tr>
-                <td><a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">{{ game.id }}</a></td>
+                <td>{{ game.id }}</a></td>
                 <td>{% if game.image %}<img src="{{ asset(game.image.webPath) }}" alt="{{ game.image.alt }}" />{% endif %}</td>
                 <td>{{ game.name|escape }}</td>
                 <td>{{ game.description|escape }}</td>
@@ -27,7 +35,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('game_show', { 'id': game.id, 'slug': game.slug }) }}">show</a>
+                            <a href="{{ path('admin_game_edit', { 'id': game.id }) }}">Modifier</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_game_delete', { 'id': game.id }) }}">Supprimer</a>
                         </li>
                     </ul>
                 </td>
@@ -37,19 +48,4 @@
     </table>
 
     {% include '@OCGameCritic/_pagination.html.twig' %}
-
-    <ul>
-        <li>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
-        {% else %}
-            <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
-        {% endif %}
-        </li>
-    {% if is_granted('ROLE_ADMIN') %}
-        <li>
-            <a href="{{ path('admin_game_index') }}">Administration</a>
-        </li>
-    {% endif %}
-    </ul>
 {% endblock %}

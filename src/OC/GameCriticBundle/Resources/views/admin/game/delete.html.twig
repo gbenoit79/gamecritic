@@ -1,0 +1,21 @@
+{% extends '@OCGameCritic/admin/layout.html.twig' %}
+
+{% block title %}
+  Supprimer un jeu - {{ parent() }}
+{% endblock %}
+
+{% block ocgamecritic_admin_body %}
+    <h2>Supprimer un jeu</h2>
+
+    <p>
+        Etes-vous certain de vouloir supprimer le jeu "{{ game.name }}" ?
+    </p>
+
+    <form action="{{ path('admin_game_delete', {'id': game.id}) }}" method="post">
+        <a href="{{ path('admin_game_index') }}" class="btn btn-default">
+            Annuler
+        </a>
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

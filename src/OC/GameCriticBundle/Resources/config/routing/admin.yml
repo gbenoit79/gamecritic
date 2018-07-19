@@ -1,0 +1,44 @@
+admin_game_index:
+    path:     /{page}
+    defaults: { _controller: "OCGameCriticBundle:AdminGame:index", page: 1 }
+    requirements:
+        page: '\d+'
+    methods:  GET
+
+admin_game_new:
+    path:     /game/new
+    defaults: { _controller: "OCGameCriticBundle:AdminGame:new" }
+    methods:  [GET, POST]
+
+admin_game_edit:
+    path:     /game/{id}/edit
+    defaults: { _controller: "OCGameCriticBundle:AdminGame:edit" }
+    methods:  [GET, POST]
+
+admin_game_delete:
+    path:     /game/{id}/delete
+    defaults: { _controller: "OCGameCriticBundle:AdminGame:delete" }
+    methods:  [GET, POST]
+
+
+admin_critic_index:
+    path:     /critic/{page}
+    defaults: { _controller: "OCGameCriticBundle:AdminCritic:index", page: 1 }
+    requirements:
+        page: '\d+'
+    methods:  GET
+
+admin_critic_new:
+    path:     /critic/new
+    defaults: { _controller: "OCGameCriticBundle:AdminCritic:new" }
+    methods:  [GET, POST]
+
+admin_critic_edit:
+    path:     /critic/{id}/edit
+    defaults: { _controller: "OCGameCriticBundle:AdminCritic:edit" }
+    methods:  [GET, POST]
+
+admin_critic_delete:
+    path:     /critic/{id}/delete
+    defaults: { _controller: "OCGameCriticBundle:AdminCritic:delete" }
+    methods:  [GET, POST]

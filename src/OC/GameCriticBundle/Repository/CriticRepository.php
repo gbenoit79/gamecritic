@@ -14,6 +14,47 @@ use OC\GameCriticBundle\Entity\Game;
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     * Get latest critics
+     * 
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
+    public function getLatestCritics($page, $nbPerPage)
+    {
+        if ($page < 1) {
+            throw new \Exception('Invalid page parameter');
+        } elseif ($nbPerPage < 1) {
+            throw new \Exception('Invalid nbPerPage parameter');
+        }
+        
+        $query = $this->_em->createQuery('
+SELECT c 
+FROM OCGameCriticBundle:Critic c 
+ORDER BY c.creationDate DESC
+');
+        $query->setFirstResult(($page - 1) * $nbPerPage);
+        $query->setMaxResults($nbPerPage);
+
+        return new Paginator($query, true);
+    }
+
+    /**
+     * Get total critics
+     *
+     * @return int
+     */
+    public function getTotalCritics()
+    {
+        $query = $this->_em->createQuery('
+SELECT COUNT(c) 
+FROM OCGameCriticBundle:Critic c 
+');
+
+        return (int) $query->getSingleScalarResult();
+    }
+    
+    /**
      * Get latest critics by game
      * 
      * @param Game $game
