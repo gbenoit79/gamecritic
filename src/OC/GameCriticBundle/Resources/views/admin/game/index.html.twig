@@ -7,21 +7,17 @@
 {% block ocgamecritic_admin_body %}
     <h2>Liste des jeux</h2>
 
-    <ul>
-        <li><a href="{{ path('admin_game_new') }}">Ajouter un jeu</a></li>
-    </ul>
-
-    <table>
-        <thead>
+    <table class="table table-hover">
+        <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Note</th>
-                <th>Plate-formes</th>
-                <th>Date de sortie</th>
-                <th>Actions</th>
+                <th class="align-middle">Id</th>
+                <th class="align-middle">Image</th>
+                <th class="align-middle">Nom</th>
+                <th class="align-middle">Description</th>
+                <th class="align-middle">Note</th>
+                <th class="align-middle">Plate-formes</th>
+                <th class="align-middle">Date de sortie</th>
+                <th class="align-middle">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -50,4 +46,12 @@
     </table>
 
     {% include '@OCGameCritic/_pagination.html.twig' %}
+
+    <nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin_game_new') }}">Ajouter un jeu</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

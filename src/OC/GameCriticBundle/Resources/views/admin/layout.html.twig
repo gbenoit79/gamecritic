@@ -1,17 +1,38 @@
 {% extends '@OCGameCritic/layout.html.twig' %}
 
 {% block body %}
-    <h1>Administration de GameCritic</h1>
-    <hr>
+    <header class="container">
+        <h1><a href="{{ path('admin_game_index') }}">Administration de GameCritic</a></h1>
+    </header>
 
-    <ul>
-        <li><a href="{{ path('admin_game_index') }}">Gérer les jeux</a></li>
-        <li><a href="{{ path('admin_critic_index') }}">Gérer les critiques</a></li>
-        <li><a href="{{ path('oc_game_critic_homepage') }}">Aller sur le site</a></li>
-    </ul>
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-expand-sm bg-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_game_index') }}">Gérer les jeux</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_critic_index') }}">Gérer les critiques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('oc_game_critic_homepage') }}">Aller sur le site</a>
+                        </li>
+                    </ul>
+                </nav>
 
-    {% block ocgamecritic_admin_body %}
-    {% endblock %}
+                {% block ocgamecritic_admin_body %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <p>
+            &copy; GameCritic 2018
+        </p>
+    </footer>
 {% endblock %}
 
 {% block title %}Administration - GameCritic{% endblock %}
