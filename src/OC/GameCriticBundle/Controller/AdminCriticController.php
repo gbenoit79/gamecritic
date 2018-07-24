@@ -32,7 +32,7 @@ class AdminCriticController extends Controller
             if ($page > $nbPages) {
                 throw $this->createNotFoundException("Page ".$page." does not exist");
             }
-            $critics = $em->getRepository('OCGameCriticBundle:Critic')->getLatestCritics($page, $nbPerPage);
+            $critics = $em->getRepository('OCGameCriticBundle:Critic')->findBy([], ['reportCounter' => 'DESC'], $nbPerPage, ($page - 1) * $nbPerPage);
         } else {
             $critics = [];
             $nbPages = 0;
