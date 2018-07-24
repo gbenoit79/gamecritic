@@ -6,7 +6,9 @@ use OC\GameCriticBundle\Entity\Critic;
 use OC\GameCriticBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Critic controller.
@@ -42,5 +44,41 @@ class CriticController extends Controller
             'form' => $form->createView(),
             'game' => $game,
         ));
+    }
+
+    /**
+     * Report critic.
+     * 
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function reportAction(Critic $critic, Request $request, SessionInterface $session)
+    {
+        // Check in user session if this critic is already reported
+        $criticsIdReported = $session->get('criticsIdReported', []);
+        if (in_array($critic->getId(), $criticsIdReported)) {
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(['message' => 'Signalement déjà effectué.']);
+            } else {
+                $request->getSession()->getFlashBag()->add('success', 'Signalement déjà effectué.');
+    
+                return $this->redirectToRoute('game_show', ['id' => $critic->getGame()->getId(), 'slug' => $critic->getGame()->getSlug()]);
+            }
+        }
+        array_push($criticsIdReported, $critic->getId());
+        $session->set('criticsIdReported', $criticsIdReported);
+        
+        // Increment critic report counter
+        $em = $this->getDoctrine()->getManager();
+        $critic->setReportCounter($critic->getReportCounter() + 1);
+        $em->persist($critic);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(['message' => 'Signalement bien effectué.']);
+        } else {
+            $request->getSession()->getFlashBag()->add('success', 'Signalement bien effectué.');
+
+            return $this->redirectToRoute('game_show', ['id' => $critic->getGame()->getId(), 'slug' => $critic->getGame()->getSlug()]);
+        }
     }
 }

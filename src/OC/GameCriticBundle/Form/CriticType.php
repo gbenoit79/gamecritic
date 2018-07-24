@@ -19,6 +19,7 @@ class CriticType extends AbstractType
             ->add('game')
             ->add('user')
             ->add('score')
+            ->add('reportCounter')
             ->add('content', TextareaType::class, [
                 'label' => 'Critique',
             ])

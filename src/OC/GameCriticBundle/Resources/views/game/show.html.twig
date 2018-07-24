@@ -50,3 +50,9 @@
         </ul>
     </nav>
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{ asset('js/game-show.js') }}"></script>
+{% endblock %}

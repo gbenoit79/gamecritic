@@ -3,4 +3,7 @@ critic_new:
     defaults: { _controller: "OCGameCriticBundle:Critic:new" }
     methods:  [GET, POST]
 
-
+critic_report:
+    path:     /report/{id}
+    defaults: { _controller: "OCGameCriticBundle:Critic:report" }
+    methods:  [GET, POST]

@@ -36,6 +36,13 @@ class Critic
     private $content;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="report_counter", type="integer")
+     */
+    private $reportCounter;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime")
@@ -190,5 +197,29 @@ class Critic
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set reportCounter
+     *
+     * @param integer $reportCounter
+     *
+     * @return Critic
+     */
+    public function setReportCounter($reportCounter)
+    {
+        $this->reportCounter = $reportCounter;
+
+        return $this;
+    }
+
+    /**
+     * Get reportCounter
+     *
+     * @return integer
+     */
+    public function getReportCounter()
+    {
+        return $this->reportCounter;
     }
 }

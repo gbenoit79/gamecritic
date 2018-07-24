@@ -13,4 +13,7 @@
             {{ critic.content|escape }}
         </div>
     </div>
+    <div class="critic-report text-right">
+        <a href="{{ path('critic_report', { 'id': critic.id }) }}"{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} class="critic-report-link"{% endif %}>Signaler</a>
+    </div>
 </div>

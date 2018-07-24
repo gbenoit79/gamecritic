@@ -83,7 +83,15 @@ ul {
     width: 95%;
     text-align: justify;
 }
+.critic-report {
+    margin-top: 10px;
+}
 
 .pagination {
     margin-bottom: 20px;
+}
+
+.disabled-link {
+    cursor: default;
+    text-decoration: none;
 }
